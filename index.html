@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>
+      Term Calculator | FD Calculator - Fixed Deposit Maturity & Interest
+      Calculator
+    </title>
+    <meta
+      name="description"
+      content="FD Calculator Online - Fixed Deposit Calculator to calculate maturity value and amount of interest earned
+   for any bank - SBI, ICICI, HDFC, Axis and so on."
+    />
+    <link rel="canonical" href="https://termcalculator.in/" />
+    <meta name="robots" content="index, follow" />
+
+    <link
+      rel=" apple-touch-icon"
+      sizes="180x180"
+      href="/images/apple-touch-icon.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="/images/favicon-32x32.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="16x16"
+      href="/images/favicon-16x16.png"
+    />
+    <link rel="manifest" href="/images/site.webmanifest" />
+
+    <link rel="stylesheet" href="/styles/styles.css" />
+    <script
+      src="http://code.jquery.com/jquery-latest.min.js"
+      type="text/javascript"
+    ></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.js"></script>
+  </head>
+
+  <body>
+    <div class="center-container">
+      <div id="cssmenu">
+        <ul>
+          <li class="active"><a href="/index.html">FD Calculator</a></li>
+          <li><a href="/pages/SIP_Calculator.html">SIP Calculator</a></li>
+          <li><a href="/pages/PPF_Calculator.html">PPF Calculator</a></li>
+        </ul>
+      </div>
+
+      <form id="msform">
+        <fieldset>
+          <h2 class="fs-title">FIXED DEPOSIT CALCULATOR</h2>
+          <h3 class="fs-subtitle">FD Amount &#8377;</h3>
+          <input
+            id="fd_amount"
+            class="light"
+            type="number"
+            name="number"
+            placeholder="eg. 1000"
+            min="0"
+            required
+          />
+          <h3 class="fs-subtitle">FD Period</h3>
+          <div id="side">
+            <input
+              id="fd_period"
+              class="light"
+              type="number"
+              name="period"
+              placeholder="eg. 1"
+              min="0"
+              max="100"
+            />
+            &nbsp;
+            <select name="" id="fd_date">
+              <option value="y">Year</option>
+              <option value="m">Month</option>
+              <option value="d">Days</option>
+            </select>
+          </div>
+          <h3 class="fs-subtitle">Interest %</h3>
+          <input
+            id="fd_rate"
+            class="light"
+            type="number"
+            text="period"
+            placeholder="eg. 6.5"
+            min="0"
+          />
+          <h3 class="fs-subtitle">Compounding Frequency</h3>
+          <select name="" id="fd_frequency">
+            <option value="m">Monthly</option>
+            <option value="q">Quarterly</option>
+            <option value="hy">Half Yearly</option>
+            <option value="y" selected>Yearly</option>
+          </select>
+          <input
+            type="button"
+            name="next"
+            class="next action-button"
+            onclick="CalculateFD()"
+            value="Calculate"
+          />
+        </fieldset>
+      </form>
+
+      <div class="error hidden">
+        <p>Please fill out all the fields</p>
+      </div>
+
+      <div id="summary" class="hidden">
+        <h1>Summary</h1>
+        <h2>Maturity Amount : Rs. 0 Lakh</h2>
+        <h2>Total Interest Earned : Rs. 0 Lakh</h2>
+      </div>
+
+      <div id="fd_table" class="hidden">
+        <table class="blueTable">
+          <thead>
+            <tr>
+              <th>Year</th>
+              <th>Opening Balance (₹)</th>
+              <th>Interest Earned (₹)</th>
+              <th>Closing Balance (₹)</th>
+            </tr>
+          </thead>
+          <tbody id="data_spawnPoint"></tbody>
+        </table>
+      </div>
+
+      <div id="bar_graph" class="canvas-wrapper ch">
+        <canvas id="myChart1"></canvas>
+      </div>
+
+      <div id="pie_graph" class="canvas-wrapper ch">
+        <canvas id="myChart2"></canvas>
+      </div>
+
+      <div class="details">
+        <h2>Fixed Deposit Calculator</h2>
+        &nbsp;
+        <p>
+          <strong>FD</strong> is known as a <strong>Fixed Deposit</strong> that
+          helps to calculate how much the rate of interest you can earn by
+          investing in a Fixed Deposit. You can easily calculate the amount by
+          using the following calculator. When you invest in FD, you can earn an
+          interest rate on the amount deposited, which compounds over time and
+          enables you to grow your savings.
+        </p>
+        <br />
+        <p>
+          Fixed deposits are a high-interest yielding term deposit and offered
+          by banks in India. There is <strong>No Investment</strong> option in
+          India that is as popular as Fixed Deposit (FD). This makes Fixed
+          Deposit, one of the best ways to save money and also earn interest on
+          the same.
+        </p>
+        <br />
+        <p>
+          A fixed deposit (FD) is a financial instrument provided by banks or
+          NBFCs which provides investors a higher rate of interest than a
+          regular savings account, until the given maturity date.
+        </p>
+        &nbsp;
+
+        <h3>Benefits of Fixed Deposit</h3>
+        <ul>
+          <li><span class="arrow">&#8658;</span>Fixed Returns</li>
+          <li><span class="arrow">&#8658;</span>Flexible Investment Tenure</li>
+          <li><span class="arrow">&#8658;</span>Tax benefits</li>
+          <li><span class="arrow">&#8658;</span>Rewarding and Simple</li>
+          <li>
+            <span class="arrow">&#8658;</span>Residents of India can open these
+            accounts for a minimum of 7 days.
+          </li>
+          <li>
+            <span class="arrow">&#8658;</span>Investing in a fixed deposit earns
+            you a higher interest rate than depositing your money in a savings
+            account.
+          </li>
+        </ul>
+        <br />
+        <h3>Advantages of Fixed Deposit</h3>
+        <ul>
+          <li><span class="arrow">&#8658;</span>Low risk</li>
+          <li><span class="arrow">&#8658;</span>Secured</li>
+          <li><span class="arrow">&#8658;</span>Returns are assured</li>
+          <li><span class="arrow">&#8658;</span>Safe investment</li>
+          <li>
+            <span class="arrow">&#8658;</span>Higher rate of interest (Eg. 7%
+            p.a)
+          </li>
+          <li><span class="arrow">&#8658;</span>Provide flexibility</li>
+        </ul>
+        <br />
+        <h3>Disadvantages of Fixed Deposit</h3>
+        <ul>
+          <li>
+            <span class="arrow">&#8658;</span>No flexibility to access your
+            funds
+          </li>
+          <li><span class="arrow">&#8658;</span>Locked-in funds</li>
+          <li><span class="arrow">&#8658;</span>Penalties on withdrawal</li>
+          <li><span class="arrow">&#8658;</span>Fixed interest rate</li>
+        </ul>
+      </div>
+
+      <p id="disclaimer">
+        Disclaimer : The content of this website should only be used for
+        informational purposes.
+      </p>
+
+      <footer class="footer">
+        <div class="container">
+          <div class="footer-right">
+            <a href="pages/terms.html">Terms of Use</a>
+            <span>&middot;</span>
+            <a href="pages/privacypolicy.html">Privacy Policy</a>
+            <span>&middot;</span>
+            <a href="mailto:contact@termcalculator.in">Contact Us</a>
+          </div>
+
+          <p class="footer-left">
+            <span>
+              &copy; 2020
+              <a href="https://www.termcalculator.in"
+                >Termcalculator.in</a
+              ></span
+            >
+          </p>
+        </div>
+      </footer>
+    </div>
+
+    <script src="/js/calculator.js"></script>
+    <script src="/js/template.js"></script>
+  </body>
+  <html></html>
+</html>

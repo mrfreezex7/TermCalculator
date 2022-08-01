@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>
+      Term Calculator | PPF Calculator - Calculate Interest/Returns on PPF
+      Investment
+    </title>
+    <meta
+      name="description"
+      content="PPF Calculator Online - Public Provident Fund Calculator to calculate interests and maturity amount on your investment."
+    />
+    <link
+      rel="canonical"
+      href="https://termcalculator.in/pages/PPF_Calculator.html"
+    />
+    <meta name="robots" content="index, follow" />
+
+    <link
+      rel="apple-touch-icon"
+      sizes="180x180"
+      href="/images/apple-touch-icon.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="/images/favicon-32x32.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="16x16"
+      href="/images/favicon-16x16.png"
+    />
+    <link rel="manifest" href="/images/site.webmanifest" />
+
+    <link rel="stylesheet" href="/styles/styles.css" />
+    <script
+      src="http://code.jquery.com/jquery-latest.min.js"
+      type="text/javascript"
+    ></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.js"></script>
+  </head>
+
+  <body>
+    <div class="center-container">
+      <div id="cssmenu">
+        <ul>
+          <li><a href="/index.html">FD Calculator</a></li>
+          <li><a href="/pages/SIP_Calculator.html">SIP Calculator</a></li>
+          <li class="active">
+            <a href="/pages/PPF_Calculator.html">PPF Calculator</a>
+          </li>
+        </ul>
+      </div>
+
+      <p id="ppf-disclaimer">
+        The current interest rate (effective from August 2019) is 7.9 %
+      </p>
+      <form id="msform">
+        <fieldset>
+          <h2 class="fs-title">PPF Calculator</h2>
+          <h3 class="fs-subtitle">Deposit Amount</h3>
+          <input
+            id="ppf_amount"
+            class="light"
+            type="number"
+            name="number"
+            placeholder=" &#8377; &nbsp; 1000"
+            min="0"
+          />
+          <h3 class="fs-subtitle">Every</h3>
+          <div id="side">
+            <select name="" id="ppf_date">
+              <option value="year">Year</option>
+            </select>
+          </div>
+          <input
+            type="button"
+            name="next"
+            class="next action-button"
+            onclick="CalculatePPF()"
+            value="Calculate"
+          />
+        </fieldset>
+      </form>
+
+      <div class="error hidden">
+        <p>Please fill out all the fields</p>
+      </div>
+
+      <div id="summary" class="hidden">
+        <h1>Summary</h1>
+        <h2>Maturity Amount : Rs. 0 Lakh</h2>
+      </div>
+
+      <div id="ppf_table" class="hidden">
+        <table class="blueTable">
+          <thead>
+            <tr>
+              <th>Year</th>
+              <th>Opening Balance (₹)</th>
+              <th>Amount Deposited (₹)</th>
+              <th>Interest Earned (₹)</th>
+              <th>Closing Balance (₹)</th>
+              <th>Loan (Max.)</th>
+              <th>Withdrawal (Max.)</th>
+            </tr>
+          </thead>
+          <tbody id="data_spawnPoint"></tbody>
+        </table>
+      </div>
+
+      <div id="bar_graph" class="canvas-wrapper ch">
+        <canvas id="myChart1"></canvas>
+      </div>
+
+      <div id="pie_graph" class="canvas-wrapper ch">
+        <canvas id="myChart2"></canvas>
+      </div>
+
+      <div class="details">
+        <h2>Public Provident Fund (PPF)</h2>
+        <br />
+        <p>
+          <strong>PPF</strong> is also known as the Public Provident Fund which
+          is a popular long term investment option backed by the Government of
+          India which offers safety with attractive interest rates and returns
+          that are fully exempted from Tax. PPF Calculator is a simple online
+          tool for PPF related calculations.
+        </p>
+        <br />
+        <p>
+          What is a PPF account? The objective of PPF is to give an option to
+          salaried individuals, who are not covered under the Employees
+          Provident Fund (EPF), to save money for retirement. If someone who is
+          self-employed, then also one can open a PPF account for long-term
+          savings.
+        </p>
+        <br />
+        <p>
+          The interest rate is <strong>7.9% per annum</strong> (compounded
+          annually) and it's
+          <strong>Tax-Free</strong>
+          (contribution under 80C and interest earned is fully exempt without
+          any limit). Anyone individual Indian resident(including minor but not
+          NRIs) can open an account with any nationalized bank (SBI, PNB,
+          Central Bank of India, etc) or post office or some authorized private
+          banks (ICICI, HDFC, Axis Bank, etc).
+          <strong
+            >The duration is 15 years and one can deposit anywhere between Rs.
+            500 (minimum) to 1.5 lac (maximum) per year</strong
+          >.
+        </p>
+        <br />
+        <h3>Benefits of PPF</h3>
+        <ul>
+          <li>
+            <span class="arrow">&#8658;</span>Liquidity with partial withdrawal
+            and loan facilities
+          </li>
+          <li><span class="arrow">&#8658;</span>The flexibility of tenure</li>
+        </ul>
+        <br />
+        <h3>Advantages of PPF</h3>
+        <ul>
+          <li>
+            <span class="arrow">&#8658;</span>Risk-free, guaranteed returns
+          </li>
+          <li><span class="arrow">&#8658;</span>Multiple PPF tax benefits</li>
+          <li><span class="arrow">&#8658;</span>Small savings, good returns</li>
+        </ul>
+        <br />
+        <h3>Disadvantages of PPF</h3>
+        <ul>
+          <li><span class="arrow">&#8658;</span>Fixed Interest Rate</li>
+          <li>
+            <span class="arrow">&#8658;</span>Lower returns than Mutual Funds
+          </li>
+          <li><span class="arrow">&#8658;</span>Rigidity</li>
+        </ul>
+      </div>
+      <p id="disclaimer">
+        Disclaimer : The content of this website should only be used for
+        informational purposes.
+      </p>
+
+      <footer class="footer">
+        <div class="container">
+          <div class="footer-right">
+            <a href="pages/terms.html">Terms of Use</a>
+            <span>&middot;</span>
+            <a href="pages/privacypolicy.html">Privacy Policy</a>
+            <span>&middot;</span>
+            <a href="mailto:contact@termcalculator.in">Contact Us</a>
+          </div>
+
+          <p class="footer-left">
+            <span
+              >&copy; 2020
+              <a href="https://www.termcalculator.in"
+                >Termcalculator.in</a
+              ></span
+            >
+          </p>
+        </div>
+      </footer>
+    </div>
+
+    <script src="/js/calculator.js"></script>
+    <script src="/js/template.js"></script>
+  </body>
+  <html></html>
+</html>

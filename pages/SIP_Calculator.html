@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>
+      Term Calculator | SIP Calculator - Calculate returns for SIP investments
+    </title>
+    <meta
+      name="description"
+      content="SIP Calculator Online - Systematic Investment Plan Calculator to Calculate returns on your monthly SIP investments and get a rough estimate on your final maturity amount."
+    />
+    <link
+      rel="canonical"
+      href="https://termcalculator.in/pages/SIP_Calculator.html"
+    />
+    <meta name="robots" content="index, follow" />
+
+    <link
+      rel="apple-touch-icon"
+      sizes="180x180"
+      href="/images/apple-touch-icon.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="/images/favicon-32x32.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="16x16"
+      href="/images/favicon-16x16.png"
+    />
+    <link rel="manifest" href="/images/site.webmanifest" />
+
+    <link rel="stylesheet" href="/styles/styles.css" />
+    <script
+      src="http://code.jquery.com/jquery-latest.min.js"
+      type="text/javascript"
+    ></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.js"></script>
+  </head>
+
+  <body>
+    <div class="center-container">
+      <div id="cssmenu">
+        <ul>
+          <li><a href="/index.html">FD Calculator</a></li>
+          <li class="active">
+            <a href="/pages/SIP_Calculator.html">SIP Calculator</a>
+          </li>
+          <li><a href="/pages/PPF_Calculator.html">PPF Calculator</a></li>
+        </ul>
+      </div>
+
+      <form id="msform">
+        <fieldset>
+          <h2 class="fs-title">SIP Calculator</h2>
+          <h3 class="fs-subtitle">Monthly Investment Amount &#8377;</h3>
+          <input
+            id="sip_amount"
+            class="light"
+            type="number"
+            name="number"
+            placeholder="eg. 1000"
+            min="0"
+          />
+          <h3 class="fs-subtitle">Investment Period</h3>
+          <div id="side">
+            <input
+              id="sip_period"
+              class="light"
+              type="number"
+              name="period"
+              placeholder="eg. 1"
+              min="0"
+              max="100"
+            />
+            &nbsp;
+            <select name="" id="sip_date">
+              <option value="y">Year</option>
+            </select>
+          </div>
+          <h3 class="fs-subtitle">Expected Annual Returns %</h3>
+          <input
+            type="number"
+            class="light"
+            id="sip_rate"
+            text="period"
+            placeholder="15"
+            min="0"
+          />
+          <input
+            type="button"
+            name="next"
+            class="next action-button"
+            onclick="CalculateSIP()"
+            value="Calculate"
+          />
+        </fieldset>
+      </form>
+
+      <div class="error hidden">
+        <p>Please fill out all the fields</p>
+      </div>
+
+      <div id="summary" class="hidden">
+        <h1>Summary</h1>
+        <h2>Expected Amount : Rs. 0 Lakh</h2>
+        <h2>Amount Invested : Rs. 0 Lakh</h2>
+        <h2>Wealth Gain : Rs. 0 Lakh</h2>
+      </div>
+
+      <div id="pie_graph" class="canvas-wrapper ch">
+        <canvas id="myChart2"></canvas>
+      </div>
+
+      <div class="details">
+        <h2>Systematic Investment Plan (SIP)</h2>
+        <br />
+        <p>
+          <strong>SIP</strong> is known as a Systematic Investment Plan which
+          gives the facility offered by <strong>Mutual Funds</strong> to the
+          investors to invest in a disciplined manner. SIP facility allows an
+          investor to invest a fixed amount of money at predefined intervals in
+          the selected mutual fund scheme. A SIP is a mere tool that helps you
+          to invest regularly in mutual fund schemes, mostly in equity mutual
+          fund schemes. A SIP helps you to stagger your investments in equity
+          mutual fund schemes over a period. Most mutual fund advisors do not
+          recommend investing a lump sum in equity mutual funds.
+        </p>
+        <br />
+        <p>
+          A fixed amount of money is debited by the investors in bank accounts
+          periodically and invested in a specified mutual fund. SIP works on the
+          principle of regular investments. It is like your recurring deposit
+          where you put in a small amount every month.
+        </p>
+        <br />
+        <p>
+          The following calculator helps you calculate the wealth gain and
+          expected <strong>Returns</strong> for your monthly SIP investment. You
+          get a rough estimate on the <strong>Maturity</strong> amount for any
+          monthly SIP, based on a projected annual return rate.
+        </p>
+        <br />
+        <h3>Benefits of SIP</h3>
+        <ul>
+          <li><span class="arrow">&#8658;</span>It is very flexible</li>
+          <li>
+            <span class="arrow">&#8658;</span>No worries about market ups &
+            downs
+          </li>
+          <li><span class="arrow">&#8658;</span>Plans are in budget</li>
+          <li><span class="arrow">&#8658;</span>Convenience</li>
+          <li><span class="arrow">&#8658;</span>No need to time the market</li>
+          <li><span class="arrow">&#8658;</span>Power of Compounding</li>
+          <li><span class="arrow">&#8658;</span>Rupee Cost Averaging</li>
+        </ul>
+        <br />
+        <h3>Advantages of SIP</h3>
+        <ul>
+          <li>
+            <span class="arrow">&#8658;</span>SIPs are flexible and are an
+            affordable investment option
+          </li>
+          <li><span class="arrow">&#8658;</span>Reduces overall Risk</li>
+          <li><span class="arrow">&#8658;</span>Achieve your Goals</li>
+          <li>
+            <span class="arrow">&#8658;</span>You become a disciplined investor
+            and not a trader.
+          </li>
+          <li>
+            <span class="arrow">&#8658;</span>You need not worry about the daily
+            NAV movement or index movement.
+          </li>
+        </ul>
+        <br />
+        <h3>Disadvantages of SIP</h3>
+        <ul>
+          <li>
+            <span class="arrow">&#8658;</span>You may miss out on the bulk
+            purchase when the market crashes hence large return.
+          </li>
+          <li>
+            <span class="arrow">&#8658;</span>You end-up buying at a higher
+            price when the market is picking & you don’t want to invest.
+          </li>
+          <li>
+            <span class="arrow">&#8658;</span>When there is a long recession
+            (say 5 to 7 years), you may get a lower return.
+          </li>
+        </ul>
+      </div>
+
+      <p id="disclaimer">
+        Disclaimer : The content of this website should only be used for
+        informational purposes.
+      </p>
+
+      <footer class="footer">
+        <div class="container">
+          <div class="footer-right">
+            <a href="pages/terms.html">Terms of Use</a>
+            <span>&middot;</span>
+            <a href="pages/privacypolicy.html">Privacy Policy</a>
+            <span>&middot;</span>
+            <a href="mailto:contact@termcalculator.in">Contact Us</a>
+          </div>
+
+          <p class="footer-left">
+            <span>
+              &copy; 2020
+              <a href="https://www.termcalculator.in"
+                >Termcalculator.in</a
+              ></span
+            >
+          </p>
+        </div>
+      </footer>
+    </div>
+
+    <script src="/js/calculator.js"></script>
+    <script src="/js/template.js"></script>
+  </body>
+  <html></html>
+</html>
